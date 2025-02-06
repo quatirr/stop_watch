@@ -17,7 +17,7 @@
         border-radius: 10px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         width: 100%;
-        max-width: 400px; /* Maksimal lebar untuk responsivitas */
+        max-width: 400px; /
     }
 
     h1 {
@@ -33,7 +33,7 @@
         border: 2px solid #333;
         border-radius: 10px;
         width: 100%;
-        max-width: 350px; /* Menyesuaikan ukuran layar */
+        max-width: 350px;
         margin: 0 auto;
         background-color: #fafafa;
         color: #333;
@@ -48,7 +48,7 @@
         border: none;
         background-color: #FFC0CB;
         color: white;
-        transition: background-color 0.3s ease; /* Efek transisi */
+        transition: background-color 0.3s ease; 
     }
 
     button:hover {
@@ -85,7 +85,6 @@
         background-color: #e42f2f;
     }
 
-    /* Responsivitas */
     @media (max-width: 600px) {
         #display {
             font-size: 36px;
