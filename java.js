@@ -65,7 +65,9 @@ function recordLap() {
     
     const lapItem = document.createElement("li");
     lapItem.textContent = `Lap ${lapTimes.length}: ${lapTime}`;
-    
+    lapItem.draggable = true; 
+    lapItem.dataset.index = lapTimes.length - 1; 
+
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
     deleteButton.onclick = function() {
@@ -73,23 +75,79 @@ function recordLap() {
     };
     lapItem.appendChild(deleteButton);
     
+    lapItem.addEventListener("dragstart", (e) => {
+        e.dataTransfer.setData("text/plain", lapItem.dataset.index); 
+        setTimeout(() => {
+            lapItem.classList.add("dragging");
+        }, 0);
+    });
+
+    lapItem.addEventListener("dragend", () => {
+        lapItem.classList.remove("dragging");
+    });
+
+    lapItem.addEventListener("dragover", (e) => {
+        e.preventDefault(); 
+    });
+
+    lapItem.addEventListener("drop", (e) => {
+        e.preventDefault();
+        const draggedIndex = e.dataTransfer.getData("text/plain");
+        const droppedIndex = lapItem.dataset.index; 
+        [lapTimes[draggedIndex], lapTimes[droppedIndex]] = [lapTimes[droppedIndex], lapTimes[draggedIndex]];
+
+        reorderLapList();
+    });
+
     lapList.appendChild(lapItem);
 }
 
 function deleteLap(index, lapItem) {
     lapTimes.splice(index, 1);
-    
     lapList.removeChild(lapItem);
+    reorderLapList(); 
+}
 
-    const lapItems = lapList.getElementsByTagName("li");
-    for (let i = 0; i < lapItems.length; i++) {
-        lapItems[i].textContent = `Lap ${i + 1}: ${lapTimes[i]}`;
-        
+function reorderLapList() {
+    lapList.innerHTML = ''; 
+    lapTimes.forEach((lapTime, index) => {
+        const lapItem = document.createElement("li");
+        lapItem.textContent = `Lap ${index + 1}: ${lapTime}`;
+        lapItem.draggable = true; 
+        lapItem.dataset.index = index; 
         const deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete";
         deleteButton.onclick = function() {
-            deleteLap(i, lapItems[i]);  
+            deleteLap(index, lapItem);  
         };
-        lapItems[i].appendChild(deleteButton);  
-    }
+        lapItem.appendChild(deleteButton);
+        
+        // Attach drag events
+        lapItem.addEventListener("dragstart", (e) => {
+            e.dataTransfer.setData("text/plain", lapItem.dataset.index); 
+            setTimeout(() => {
+                lapItem.classList.add("dragging");
+            }, 0);
+        });
+
+        lapItem.addEventListener("dragend", () => {
+            lapItem.classList.remove("dragging");
+        });
+
+        lapItem.addEventListener("dragover", (e) => {
+            e.preventDefault();
+        });
+
+        lapItem.addEventListener("drop", (e) => {
+            e.preventDefault();
+            const draggedIndex = e.dataTransfer.getData("text/plain");
+            const droppedIndex = lapItem.dataset.index; 
+
+            [lapTimes[draggedIndex], lapTimes[droppedIndex]] = [lapTimes[droppedIndex], lapTimes[draggedIndex]];
+
+            reorderLapList();
+        });
+
+        lapList.appendChild(lapItem);
+    });
 }
