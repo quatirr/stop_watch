@@ -1,59 +1,104 @@
-/* styles.css */
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f4f4f9;
-}
+    /* styles.css */
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f4f4f9;
+        box-sizing: border-box;
+    }
 
-.stopwatch-container {
-    text-align: center;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
+    .stopwatch-container {
+        text-align: center;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px; /* Maksimal lebar untuk responsivitas */
+    }
 
-h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
+    h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #333;
+    }
 
-#display {
-    font-size: 48px;
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 2px solid #333;
-    border-radius: 5px;
-    width: 180px;
-    margin: 0 auto;
-}
+    #display {
+        font-size: 48px;
+        margin-bottom: 20px;
+        padding: 15px;
+        border: 2px solid #333;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 350px; /* Menyesuaikan ukuran layar */
+        margin: 0 auto;
+        background-color: #fafafa;
+        color: #333;
+    }
 
-button {
-    padding: 10px 20px;
-    margin: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    border: none;
-    background-color: #FFC0CB;
-    color: white;
-}
+    button {
+        padding: 12px 25px;
+        margin: 10px;
+        font-size: 18px;
+        cursor: pointer;
+        border-radius: 5px;
+        border: none;
+        background-color: #FFC0CB;
+        color: white;
+        transition: background-color 0.3s ease; /* Efek transisi */
+    }
 
-button:hover {
-    background-color: #e95d74;
-}
+    button:hover {
+        background-color: #e95d74;
+    }
 
-#lapList {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 20px;
-}
+    #lapList {
+        list-style-type: none;
+        padding: 0;
+        margin-top: 20px;
+    }
 
-#lapList li {
-    font-size: 16px;
-    margin-bottom: 5px;
-}
+    #lapList li {
+        font-size: 16px;
+        margin-bottom: 10px;
+        padding: 5px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #lapList li button {
+        background-color: #ff4d4d;
+        padding: 5px 10px;
+        font-size: 14px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #lapList li button:hover {
+        background-color: #e42f2f;
+    }
+
+    /* Responsivitas */
+    @media (max-width: 600px) {
+        #display {
+            font-size: 36px;
+            width: 90%;
+        }
+
+        button {
+            font-size: 14px;
+            padding: 10px 20px;
+        }
+
+        #lapList li {
+            font-size: 14px;
+            padding: 5px 10px;
+        }
+    }
